@@ -9,8 +9,12 @@ export const ProductCard = ({product}) => {
     const [inCart, setInCart] = useState(false);
     const {id, name, overview, poster, price, rating, best_seller} = product;
 
+    console.log(product);
+    console.log(cartList)
+
     useEffect(() => {
         const productInCart = cartList.find(item => item.id === product.id);
+        console.log(productInCart);
 
         if(productInCart){
             setInCart(true);

@@ -1,5 +1,8 @@
 import { createContext, useContext, useReducer } from "react";
-import { cartReducer } from "../reducers";
+import { cartReducer } from "../reducers/cartReducer";
+
+
+
 
 const CartInitialState = {
     cartList: [],
@@ -11,9 +14,11 @@ const CartContext = createContext(CartInitialState);
 export const CartProvider = ({ children }) => {
     const [state, dispatch] = useReducer(cartReducer, CartInitialState);
     const addToCart = (product) => {
+        console.log(product)
         const updateList = state.cartList.concat(product);
+        console.log(updateList)
         const updatedTotal = state.total + product.price;
-
+        console.log(updatedTotal)
         dispatch({
             type: "ADD_TO_CART",
             payload: {
@@ -46,6 +51,8 @@ export const CartProvider = ({ children }) => {
             }
         })
     }
+
+    console.log(state)
     const value = {
         cartList: state.cartList,
         total: state.total,
@@ -61,5 +68,6 @@ export const CartProvider = ({ children }) => {
 
 }
 export const useCart = () => {
-    return useContext(CartContext);
+    const context = useContext(CartContext);
+    return context;
 }

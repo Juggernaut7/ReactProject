@@ -1,65 +1,49 @@
-export const getProductList = async (searchTerm) => {
-    const api = import.meta.env.VITE_APP_DB_SERVER;
-  
-    try {
-      const response = await fetch(`${api}/products`);
-      console.log("getProductList response:", response);
-  
-      if (!response.ok) {
-        throw {
-          message: response.statusText,
-          status: response.status,
-        };
+export async function getProductList(searchTerm){
+    
+  const api = import.meta.env.VITE_APP_DB_SERVER
+
+  const response = await fetch(`${api}/products?name_like=${searchTerm ? searchTerm : ""}`)
+
+  if(!response.ok){
+      throw{message: response.statusText, state: response.status};
+  }
+
+  const data = await response.json()
+  console.log(data)
+
+  return data
+}
+
+
+export const getProduct = async (id) => {
+
+  const api = import.meta.env.VITE_APP_DB_SERVER
+
+  const response = await fetch(`${api}/products/${id}`)
+
+  if (!response.ok) {
+      throw{
+          message: response.statusText, status: response.status
       }
-  
-      const data = await response.json(); // ✅ Properly parse JSON response
-      return data;
-    } catch (error) {
-      console.error("Error fetching product list:", error);
-      throw error;
-    }
-  };
-  
-  export const getProduct = async (id) => {
-    const api = import.meta.env.VITE_APP_DB_SERVER;
-  
-    try {
-      const response = await fetch(`${api}/products/${id}`);
-  
-      if (!response.ok) {
-        throw {
-          message: response.statusText,
-          status: response.status,
-        };
+  }
+
+  const data = await response.json();
+
+  return data
+}
+export const getFeaturedList = async () => {
+
+  const api = import.meta.env.VITE_APP_DB_SERVER
+
+  const response = await fetch(`${api}/featured_products`)
+
+  if (!response.ok) {
+      throw{
+          message: response.statusText, status: response.status
       }
-  
-      const data = await response.json(); // ✅ Properly parse JSON response
-      return data;
-    } catch (error) {
-      console.error("Error fetching product:", error);
-      throw error;
-    }
-  };
-  
-  export const getFeaturedList = async () => {
-    const api = import.meta.env.VITE_APP_DB_SERVER;
-  
-    try {
-      const response = await fetch(`${api}/featured_products`);
-      console.log("getFeaturedList response:", response);
-  
-      if (!response.ok) {
-        throw {
-          message: response.statusText,
-          status: response.status,
-        };
-      }
-  
-      const data = await response.json(); // ✅ Properly parse JSON response
-      return data;
-    } catch (error) {
-      console.error("Error fetching featured list:", error);
-      throw error;
-    }
-  };
-  
+  }
+
+  const data = await response.json();
+
+  return data
+}
