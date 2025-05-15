@@ -9,7 +9,14 @@ export async function getProductList(searchTerm){
   }
 
   const data = await response.json()
-  console.log(data)
+  if(searchTerm){
+    const filteredData = data?.filter((item) => item?.name?.toLowerCase().includes(searchTerm.toLowerCase()))  
+    return filteredData
+  }else{
+    return data
+
+  }
+
 
   return data
 }

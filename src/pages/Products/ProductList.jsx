@@ -35,7 +35,7 @@ export const ProductList = () => {
       <section className="my-5">
         <div className="my-5 flex justify-between">
           <span className="text-2xl font-semibold dark:text-slate-100 mb-5 pl-[50px]">
-            All eBoook ({products?.length || 0}) {/* ✅ Optional chaining to avoid crash */}
+            All eBoook ({products?.length || 0}) 
           </span>
           <span>
             <button

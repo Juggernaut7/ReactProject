@@ -3,7 +3,7 @@ import { filterReducer } from "../reducers";
 
 const filterInitialState = {
   productList: [],
-  onlyInStore: false,
+  onlyInStock: false,
   bestSellerOnly: false,
   sortBy: null,
   ratings: null,
